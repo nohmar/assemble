@@ -1,0 +1,12 @@
+---
+
+- name: Clone dotfiles
+  git:
+    repo: https://github.com/nohmar/dotfiles.git
+    dest: "{{ lookup('env', 'HOME') }}/dotfiles"
+    update: no
+
+- name: Install dotfiles
+  shell: ./install.sh
+  args:
+    chdir: "{{ lookup('env', 'HOME') }}/dotfiles"

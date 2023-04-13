@@ -1,0 +1,38 @@
+---
+
+- name: Install Homebrew packages
+  homebrew:
+    name:
+      - exa
+      - fzf
+      - git
+      - hub
+      - httpie
+      - imagemagick
+      - jq
+      - memcached
+      - postgresql
+      - redis
+      - ripgrep
+      - stow
+      - tmux
+      - tree
+      - vim
+    state: present
+  when: ansible_facts["os_family"] == "Darwin" 
+
+- name: Install Homebrew casks
+  homebrew_cask:
+    name:
+      - graphql-playground
+      - imageoptim
+    state: present
+    accept_external_apps: true
+  when: ansible_facts["os_family"] == "Darwin" 
+
+- import_tasks: aws.yml
+- import_tasks: alacritty.yml
+- import_tasks: asdf.yml
+- import_tasks: heroku.yml
+- import_tasks: dotfiles.yml
+- import_tasks: vim.yml

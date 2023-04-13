@@ -1,0 +1,13 @@
+---
+
+- name: Add Heroku tap
+  homebrew_tap:
+    name: heroku/brew
+    state: present
+  when: ansible_facts["os_family"] == "Darwin"
+
+- name: Install Heroku CLI
+  homebrew:
+    name: heroku
+    state: present
+  when: ansible_facts["os_family"] == "Darwin"

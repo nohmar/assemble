@@ -1,0 +1,14 @@
+---
+
+- name: Install Homebrew packages
+  homebrew_cask:
+    name:
+      - 1password
+      - authy
+      - firefox
+      - google-chrome
+      - notion
+      - rectangle
+    state: present
+    accept_external_apps: true
+  when: ansible_facts["os_family"] == "Darwin" 
