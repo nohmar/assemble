@@ -20,3 +20,4 @@
 - import_tasks: dotfiles.yml
 - import_tasks: vim.yml
 - import_tasks: asdf.yml
+- import_tasks: tailscale.yml

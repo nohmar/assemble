@@ -1,0 +1,14 @@
+---
+
+- name: Add Tailscale package signing key and repo
+  shell: |
+    curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/groovy.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
+    curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/groovy.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list
+  when: ansible_facts["os_family"] == "Debian"
+
+- name: Install Tailscale Package
+  become: true
+  package:
+    name: tailscale
+    update_cache: true
+  when: ansible_facts["os_family"] == "Debian"
