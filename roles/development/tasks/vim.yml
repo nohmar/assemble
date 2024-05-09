@@ -5,3 +5,10 @@
     repo: https://github.com/VundleVim/Vundle.vim.git
     dest: "~/.vim/bundle/Vundle.vim"
     update: no
+
+- name: Download plugins
+  command:
+    argv:
+      - vim
+      - +PluginInstall
+      - +qall
