@@ -1,0 +1,41 @@
+---
+defaults: &defaults
+  - hub
+  - fzf
+  - stow
+  - tmux
+  - ripgrep
+
+families:
+  darwin:
+    - *defaults
+    - git
+    - imagemagick
+    - jq
+    - memcached
+    - postgresql@14
+    - redis
+    - tree
+    - vim
+    - just
+    - awscli
+
+  debian:
+    - *defaults
+    - autoconf
+    - automake
+    - build-essential
+    - inotify-tools
+    - libffi-dev
+    - libncurses5-dev
+    - libreadline-dev
+    - libpq-dev
+    - libssl-dev
+    - libyaml-dev
+    - postgresql
+    - redis
+    - unixodbc-dev
+    - unzip
+    - zlib1g-dev
+
+family_with_default: "{{ families[ansible_facts['os_family'] | lower] | flatten }}"
