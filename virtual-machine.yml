@@ -1,0 +1,7 @@
+---
+
+- name: Playbook for headless virtual machines
+  hosts: localhost
+  roles:
+    - system
+    - development
