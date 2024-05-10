@@ -10,6 +10,7 @@
 - name: Install asdf plugins
   command: "{{ lookup('env', 'HOME') }}/.asdf/bin/asdf plugin-add {{ item }}"
   with_items:
+    - erlang
     - elixir
     - golang
     - nodejs

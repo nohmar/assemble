@@ -2,5 +2,6 @@
 
 - hosts: localhost
   roles:
+    - system
     - desktop
     - development

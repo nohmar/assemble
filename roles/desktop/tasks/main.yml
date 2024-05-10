@@ -3,6 +3,8 @@
 - name: Install Homebrew packages
   homebrew_cask:
     name:
+      - utm
+      - alacritty
       - 1password
       - authy
       - firefox

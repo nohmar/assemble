@@ -1,7 +1,0 @@
----
-
-- name: Install AWS CLI
-  homebrew:
-    name: awscli
-    state: present
-  when: ansible_facts["os_family"] == "Darwin"

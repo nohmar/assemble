@@ -1,0 +1,30 @@
+---
+
+# The user's name is root when `become: true`
+- name: Get local username
+  set_fact:
+    local_user: "{{ ansible_user_id }}"
+
+- name: Install system packages
+  become: "{{ ansible_system == 'Linux' }}"
+  package:
+    name:
+      - openssh-server
+      - zsh
+    state: present
+  when: ansible_facts["os_family"] == "Debian"
+
+- name: Set the user's default shell to zsh
+  become: true
+  user:
+    name: "{{ local_user }}"
+    shell: /usr/bin/zsh
+  when: ansible_facts["os_family"] == "Debian" 
+
+- name: Enable SSH
+  become: true
+  service:
+    name: ssh
+    state: started
+    enabled: true
+  when: ansible_facts["os_family"] == "Debian" 
