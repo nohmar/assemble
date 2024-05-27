@@ -22,3 +22,4 @@
 - import_tasks: asdf.yml
 - import_tasks: tailscale.yml
 - import_tasks: tmux.yml
+- import_tasks: fonts.yml
