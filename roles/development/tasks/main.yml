@@ -21,3 +21,4 @@
 - import_tasks: vim.yml
 - import_tasks: asdf.yml
 - import_tasks: tailscale.yml
+- import_tasks: tmux.yml
