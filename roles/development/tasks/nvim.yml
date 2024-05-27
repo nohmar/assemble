@@ -1,0 +1,5 @@
+---
+
+- name: Install LSP config
+  git: https://github.com/neovim/nvim-lspconfig
+  dest: "{{ lookup('env', 'HOME' }}/.config/nvim/pack/nvim/start/nvim-lspconfig"
