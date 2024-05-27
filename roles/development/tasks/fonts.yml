@@ -1,0 +1,27 @@
+---
+- name: Clone font repo
+  git:
+    repo: https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git
+    dest: "{{ lookup('env', 'HOME') }}/.cache/fonts/SFMono-Nerd-Font-Ligaturized"
+    update: yes
+  when: ansible_facts["os_family"] == "Debian"
+
+- name: Install fonts
+  copy:
+    src: "{{ item }}"
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/fonts/"
+  with_fileglob:
+    - "{{ lookup('env', 'HOME') }}/.cache/fonts/SFMono-Nerd-Font-Ligaturized/*.otf"
+  when: ansible_facts["os_family"] == "Debian"
+
+- name: Add font tap
+  homebrew_tap:
+    name: shaunsingh/SFMono-Nerd-Font-Ligaturized
+  when: ansible_facts["os_family"] == "Darwin"
+
+- name: Install font
+  homebrew_cask:
+    name:
+      - font-sf-mono-nerd-font-ligaturized
+    state: present
+  when: ansible_facts["os_family"] == "Darwin"
