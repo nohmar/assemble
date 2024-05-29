@@ -5,6 +5,7 @@ defaults: &defaults
   - stow
   - tmux
   - ripgrep
+  - neovim
 
 families:
   darwin:
