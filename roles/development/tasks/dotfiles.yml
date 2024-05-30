@@ -2,7 +2,7 @@
 
 - name: Clone dotfiles
   git:
-    repo: https://github.com/nohmar/dotfiles.git
+    repo: git@github.com:nohmar/dotfiles.git
     dest: "{{ lookup('env', 'HOME') }}/dotfiles"
     update: no
 
