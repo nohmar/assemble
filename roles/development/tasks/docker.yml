@@ -1,0 +1,42 @@
+---
+
+- name: Update apt-get
+  become: "{{ ansible_system == 'Linux' }}"
+  apt:
+    pkg:
+      - ca-certificates
+      - curl
+    update_cache: yes
+  when: ansible_facts["os_family"] == "Debian"
+
+- name: Install keyrings
+  become: yes
+  shell: |
+    install -m 0755 -d /etc/apt/keyrings
+  when: ansible_facts["os_family"] == "Debian"
+
+- name: Add Docker's GPG key
+  become: yes
+  shell: |
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    chmod a+r /etc/apt/keyrings/docker.asc
+  when: ansible_facts["os_family"] == "Debian"
+
+- name: Add Docker repository
+  shell: |
+    echo
+    'deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu
+    $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable' | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  when: ansible_facts["os_family"] == "Debian"
+
+- name: Install Docker CE packages
+  become: yes
+  package:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present
+  when: ansible_facts["os_family"] == "Debian"
