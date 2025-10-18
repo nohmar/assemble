@@ -6,6 +6,7 @@ defaults: &defaults
   - tmux
   - ripgrep
   - neovim
+  - hurl
 
 families:
   darwin:
