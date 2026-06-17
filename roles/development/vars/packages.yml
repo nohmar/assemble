@@ -6,11 +6,11 @@ defaults: &defaults
   - tmux
   - ripgrep
   - neovim
-  - hurl
 
 families:
   darwin:
     - *defaults
+    - hurl
     - git
     - imagemagick
     - jq

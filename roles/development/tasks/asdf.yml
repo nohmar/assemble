@@ -8,10 +8,15 @@
     update: yes
 
 - name: Run Make
-  command: "{{ lookup('env', 'HOME') }}/.asdf make"
+  command: make
+  args:
+    chdir: "{{ lookup('env', 'HOME') }}/.asdf"
 
 - name: Copy asdf binary into $PATH
-  command: "{{ lookup('env', 'HOME') }}/.asdf cp asdf /usr/local/bin"
+  become: true
+  command: cp asdf /usr/local/bin
+  args:
+    chdir: "{{ lookup('env', 'HOME') }}/.asdf"
 
 - name: Install asdf plugins
   command: "{{ lookup('env', 'HOME') }}/.asdf/bin/asdf plugin-add {{ item }}"
