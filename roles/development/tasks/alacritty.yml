@@ -1,0 +1,15 @@
+- name: Check if alacritty terminfo is installed
+  command: infocmp alacritty
+  register: alacritty_terminfo
+  changed_when: false
+  failed_when: false
+
+- name: Download alacritty terminfo source
+  get_url:
+    url: https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info
+    dest: /tmp/alacritty.info
+  when: alacritty_terminfo.rc != 0
+
+- name: Compile and install alacritty terminfo
+  command: tic -xe alacritty,alacritty-direct /tmp/alacritty.info
+  when: alacritty_terminfo.rc != 0
